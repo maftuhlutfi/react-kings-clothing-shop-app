@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import './Login.scss';
 import TextField from '../components/TextField';
 import CustomButton from '../components/CustomButton';
+import GoogleButton from '../components/GoogleButton';
+import { signInWithGoogle } from '../firebase/firebase.utils';
 
 class Login extends React.Component {
 	constructor() {
@@ -51,6 +53,7 @@ class Login extends React.Component {
 					/>
 				</form>
 				<CustomButton onClick={this.handleClick}>Login</CustomButton>
+				<GoogleButton onClick={signInWithGoogle}>Sign in with Google</GoogleButton>
 				<p className='footer'>Don't have an account yet? <Link to='/register'>Register here</Link></p>
 			</div>
 		);

@@ -9,6 +9,7 @@ class Register extends React.Component {
 		super();
 
 		this.state = {
+			username: '',
 			email: '',
 			password: '',
 			confirmPassword: ''
@@ -28,12 +29,20 @@ class Register extends React.Component {
 	}
 
 	render() {
-		const { email, password, confirmPassword } = this.state;
+		const { username, email, password, confirmPassword } = this.state;
 		return (
 			<div className='login'>
 				<h2>Register</h2>
 				<p>To find amazing clothes for your Outfit of the Day</p>
 				<form className='form'>
+					<TextField
+						name='username'
+						onChange={this.handleChange}
+						value={username}
+						type='text'
+						placeholder='Username'
+						required
+					/>
 					<TextField
 						name='email'
 						onChange={this.handleChange}
