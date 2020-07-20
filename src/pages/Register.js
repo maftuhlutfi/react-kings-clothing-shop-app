@@ -3,13 +3,14 @@ import './Register.scss';
 import { Link } from 'react-router-dom';
 import TextField from '../components/TextField';
 import CustomButton from '../components/CustomButton';
+import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 
 class Register extends React.Component {
 	constructor() {
 		super();
 
 		this.state = {
-			username: '',
+			displayName: '',
 			email: '',
 			password: '',
 			confirmPassword: ''
@@ -22,25 +23,48 @@ class Register extends React.Component {
 		this.setState({ [name]: value });
 	}
 
-	handleClick = e => {
+	handleClick = async e => {
 		e.preventDefault();
 
-		this.setState({ password: '', email: '', confirmPassword: '' });
+		const { displayName, email, password, confirmPassword } = this.state;
+
+		if (password !== confirmPassword) {
+			alert("Password not match.");
+			return;
+		}
+
+		try {
+			const { user } = await auth.createUserWithEmailAndPassword(
+				email,
+				password
+			);
+			await createUserProfileDocument(user, { displayName });
+
+
+			this.setState({
+				displayName: '',
+				password: '',
+				email: '',
+				confirmPassword: ''
+			});
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	render() {
-		const { username, email, password, confirmPassword } = this.state;
+		const { displayName, email, password, confirmPassword } = this.state;
 		return (
 			<div className='login'>
 				<h2>Register</h2>
 				<p>To find amazing clothes for your Outfit of the Day</p>
 				<form className='form'>
 					<TextField
-						name='username'
+						name='displayName'
 						onChange={this.handleChange}
-						value={username}
+						value={displayName}
 						type='text'
-						placeholder='Username'
+						placeholder='Display Name'
 						required
 					/>
 					<TextField
