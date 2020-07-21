@@ -4,7 +4,7 @@ import './Login.scss';
 import TextField from '../components/TextField';
 import CustomButton from '../components/CustomButton';
 import GoogleButton from '../components/GoogleButton';
-import { signInWithGoogle } from '../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../firebase/firebase.utils';
 
 class Login extends React.Component {
 	constructor() {
@@ -22,10 +22,17 @@ class Login extends React.Component {
 		this.setState({ [name]: value });
 	}
 
-	handleClick = e => {
+	handleClick = async e => {
 		e.preventDefault();
 
-		this.setState({ password: '', email: '' });
+		const { email, password } = this.state;
+
+		try {
+			await auth.signInWithEmailAndPassword(email, password);
+			this.setState({ password: '', email: '' });
+		} catch (err) {
+			console.log(err);
+		}	
 	}
 
 	render() {
