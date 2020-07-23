@@ -4,18 +4,25 @@
   max-height: 340px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 20px;
   border: 1px solid black;
   background-color: white;
   top: 90px;
   right: 300px;
   z-index: 5;
+  color: black;
 
   .cart-items {
     max-height: 280px;
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  p {
+    text-align: center;
   }
 
   button {
