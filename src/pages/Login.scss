@@ -23,10 +23,16 @@
 	.footer {
 		a {
 			font-weight: bold;
+			color: black;
 		}
 	}
 
 	.form {
 		margin: 15px 0;
+	}
+
+	.error {
+		margin: -15px 0 20px 0;
+		color: red;
 	}
 }

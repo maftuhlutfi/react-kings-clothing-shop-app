@@ -13,11 +13,13 @@ class Register extends React.Component {
 			displayName: '',
 			email: '',
 			password: '',
-			confirmPassword: ''
+			confirmPassword: '',
+			error: ''
 		}
 	}
 
 	handleChange = e => {
+		this.setState({ error: '' });
 		const { value, name } = e.target;
 
 		this.setState({ [name]: value });
@@ -28,8 +30,13 @@ class Register extends React.Component {
 
 		const { displayName, email, password, confirmPassword } = this.state;
 
+		if (displayName === '' || email ==='' || password === '') {
+			this.setState({ error: 'Please fill the form.' });
+			return;
+		}
+
 		if (password !== confirmPassword) {
-			alert("Password not match.");
+			this.setState({ error: 'Password not match.' });
 			return;
 		}
 
@@ -53,7 +60,7 @@ class Register extends React.Component {
 	}
 
 	render() {
-		const { displayName, email, password, confirmPassword } = this.state;
+		const { displayName, email, password, confirmPassword, error } = this.state;
 		return (
 			<div className='login'>
 				<h2>Register</h2>
@@ -92,6 +99,7 @@ class Register extends React.Component {
 						required
 					/>
 				</form>
+				{error !== '' && <p className='error'>{error}</p>}
 				<CustomButton onClick={this.handleClick}>Register</CustomButton>
 				<p className='footer'>Already have an account? <Link to='/login'>Login here</Link></p>
 			</div>

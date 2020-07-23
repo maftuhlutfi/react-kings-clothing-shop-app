@@ -1,4 +1,13 @@
-export const setCurrentUser = data => ({
+export const setCurrentUser = user => ({
 	type: 'SET_CURRENT_USER',
-	payload: data
+	payload: user
 });
+
+export const toggleCartHidden = () => ({
+	type: 'TOGGLE_CART_HIDDEN'
+});
+
+export const addItem = item => ({
+	type: 'ADD_ITEM',
+	payload: item
+})

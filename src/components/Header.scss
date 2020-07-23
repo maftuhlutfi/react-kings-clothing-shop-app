@@ -1,10 +1,36 @@
 .header {
+  background-color: black;
+  color: white;
   height: 70px;
-  padding: 0 10px;
-  width: 100%;
+  padding: 10px 5%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+
+  .right-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    .options {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+
+      .option {
+        margin: 10px 15px;
+        cursor: pointer;
+      }
+
+      .login {
+        background-color: white;
+        color: black;
+        padding: 10px 15px;
+        border-radius: 5px;
+      }
+    }
+  }
 
   .logo-container {
     height: 100%;
@@ -12,22 +38,9 @@
     display: flex;
     align-items: center;
   }
-
-  .options {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    .option {
-      padding: 10px 15px;
-      cursor: pointer;
-    }
-  }
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: white;
 }

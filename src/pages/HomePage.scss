@@ -1,6 +1,12 @@
 .homepage {
-	margin-top: 50px;
+	padding: 3% 5%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+	.homepage {
+		padding: 20px 7.5px 0;
+	}
 }

@@ -12,11 +12,13 @@ class Login extends React.Component {
 
 		this.state = {
 			email: '',
-			password: ''
+			password: '',
+			error: ''
 		}
 	}
 
 	handleChange = e => {
+		this.setState({ error: '' });
 		const { value, name } = e.target;
 
 		this.setState({ [name]: value });
@@ -27,16 +29,21 @@ class Login extends React.Component {
 
 		const { email, password } = this.state;
 
+		if (email === '' || password === '') {
+			this.setState({ error: 'Please enter email or password' });
+			return;
+		}
+
 		try {
 			await auth.signInWithEmailAndPassword(email, password);
 			this.setState({ password: '', email: '' });
 		} catch (err) {
-			console.log(err);
+			this.setState({error: 'Wrong email or password.'})
 		}	
 	}
 
 	render() {
-		const { email, password } = this.state;
+		const { email, password, error } = this.state;
 		return (
 			<div className='login'>
 				<h2>Login</h2>
@@ -59,6 +66,7 @@ class Login extends React.Component {
 						required
 					/>
 				</form>
+				{error !== '' && <p className='error'>{error}</p>}
 				<CustomButton onClick={this.handleClick}>Login</CustomButton>
 				<GoogleButton onClick={signInWithGoogle}>Sign in with Google</GoogleButton>
 				<p className='footer'>Don't have an account yet? <Link to='/register'>Register here</Link></p>
