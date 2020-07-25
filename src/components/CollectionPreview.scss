@@ -3,9 +3,22 @@
   flex-direction: column;
   margin-bottom: 30px;
 
-  .title {
-    font-size: 28px;
-    margin-bottom: 25px;
+  .preview-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    .more {
+      background-color: black;
+      padding: 5px 10px;
+    }
+
   }
 
   .preview {

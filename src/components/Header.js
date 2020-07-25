@@ -16,7 +16,7 @@ function Header({currentUser, hidden}) {
 		<div className="header">
 			<div className='logo-container'>
 				<Link to='/'>
-					<img src='./crown.svg' alt='logo' width="100%" />
+					<img src='/crown.svg' alt='logo' width="100%" />
 				</Link>
 			</div>
 			<div className='right-side'>

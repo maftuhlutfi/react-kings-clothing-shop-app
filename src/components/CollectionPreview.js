@@ -2,10 +2,15 @@ import React from 'react';
 import './CollectionPreview.scss';
 import CollectionItem from '../components/CollectionItem';
 
-function CollectionPreview({ title, items }) {
+import {Link} from 'react-router-dom';
+
+function CollectionPreview({ title, items, routeName }) {
 	return (
 		<div className='collection-preview'>
-			<h1 className='title'>{title}</h1>
+			<div className='preview-header'>
+				<h1 className='title'>{title}</h1>
+				<Link className='more' to={`/shop/${routeName}`}>Show all</Link>
+			</div>
 			<div className='preview'>
 				{items
 					.filter((item, index) => index < 4)
