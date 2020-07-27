@@ -41,7 +41,7 @@ function CheckoutPage({cartItems, totalPrice}) {
 				{totalPrice ? <span>Total price: ${totalPrice}</span> : ''}
 			</div>
 
-			<StripeButton price={totalPrice} />
+			{cartItems.length ? <StripeButton price={totalPrice} /> : ''}
 		</div>
 	);
 }
