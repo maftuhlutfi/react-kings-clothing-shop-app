@@ -8,7 +8,13 @@ const INITIAL_STATE = {
 
 const dataReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		default: return state;
+		case 'UPDATE_COLLECTIONS':
+			return {
+				...state,
+				collections: action.payload
+			};
+		default: 
+			return state;
 	}
 }
 

@@ -41,6 +41,38 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 	return userRef;
 }
 
+export const addCollectionsAndDocuments = async (CollectionKey, objectsToAdd) => {
+	const collectionRef = firestore.collection(CollectionKey);
+
+	const batch = firestore.batch();
+	objectsToAdd.forEach(object => {
+		const newDocRef = collectionRef.doc();
+		batch.set(newDocRef, object);
+	});
+
+	return await batch.commit();
+}
+
+export const convertCollectionsSnapshotToMap = collections => {
+	const convertedCollections = collections.docs.map(doc => {
+		const { title, items } = doc.data();
+
+		return ({
+			id: doc.id,
+			routeName: encodeURI(title.toLowerCase()),
+			title,
+			items
+		})
+	})
+
+	return (
+		convertedCollections.reduce((newCollections, collection) => {
+			newCollections[collection.title.toLowerCase()] = collection;
+			return newCollections;
+		}, {})
+	)
+}
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();

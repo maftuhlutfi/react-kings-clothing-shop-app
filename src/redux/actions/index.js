@@ -25,3 +25,8 @@ export const clearItemFromCart = item => ({
 export const clearAllItem = () => ({
 	type: 'CLEAR_ALL_ITEM'
 })
+
+export const updateCollections = collections => ({
+	type: 'UPDATE_COLLECTIONS',
+	payload: collections
+})
