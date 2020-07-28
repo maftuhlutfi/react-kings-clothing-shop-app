@@ -1,9 +1,8 @@
 import sections from './sectionsData';
-import collections from './shopData';
 
 const INITIAL_STATE = {
 	sections,
-	collections
+	collections: null
 }
 
 const dataReducer = (state = INITIAL_STATE, action) => {

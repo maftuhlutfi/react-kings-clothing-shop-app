@@ -15,12 +15,12 @@ export const selectDataSections = createSelector(
 
 export const selectDataForPreview = createSelector(
 	[selectDataCollections],
-	collections => Object.keys(collections).map(key => collections[key])
+	collections => collections ? Object.keys(collections).map(key => collections[key]) : null
 )
 
 export const selectCollection = memoize((collectionId) =>
-  createSelector(
-    [selectDataCollections],
-    (collections) => collections[collectionId]
+	createSelector(
+		[selectDataCollections],
+		(collections) => collections ? collections[collectionId] : null
   )
 );
