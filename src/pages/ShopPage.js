@@ -8,7 +8,7 @@ import CollectionPage from './CollectionPage';
 import { connect } from 'react-redux';
 import { fetchCollectionsAsync } from '../redux/actions';
 
-import { selectIsLoading, selectIsCollectionsLoaded } from '../redux/selectors/dataSelector';
+import { selectIsLoading } from '../redux/selectors/dataSelector';
 
 import withSpinner from '../components/withSpinner';
 
@@ -22,7 +22,7 @@ class ShopPage extends React.Component {
 	}
 
 	render() {
-		const { match, isLoading, isCollectionsLoaded } = this.props;
+		const { match, isLoading } = this.props;
 		console.log(isLoading);
 		return (
 			<div className="shop-page">
@@ -39,7 +39,7 @@ class ShopPage extends React.Component {
 					path={`${match.path}/:collectionId`}
 					render={(props) => 
 						<CollectionPageWithSpinner 
-							isLoading={isCollectionsLoaded} 
+							isLoading={isLoading} 
 							{...props} 
 						/>}
 				/>
@@ -54,8 +54,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-	isLoading: selectIsLoading(state),
-	isCollectionsLoaded: selectIsCollectionsLoaded(state)
+	isLoading: selectIsLoading(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
