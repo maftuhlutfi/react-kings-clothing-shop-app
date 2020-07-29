@@ -32,5 +32,5 @@ export const selectIsLoading = createSelector(
 
 export const selectIsCollectionsLoaded = createSelector(
 	[selectDataCollections],
-	collections => !!!collections
+	collections => !!collections
 )

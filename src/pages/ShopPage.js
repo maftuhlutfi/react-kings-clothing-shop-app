@@ -2,18 +2,12 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import './ShopPage.scss';
-import CollectionOverview from '../components/CollectionOverview';
-import CollectionPage from './CollectionPage';
 
 import { connect } from 'react-redux';
 import { fetchCollectionsAsync } from '../redux/actions';
 
-import { selectIsLoading } from '../redux/selectors/dataSelector';
-
-import withSpinner from '../components/withSpinner';
-
-const CollectionOverviewWithSpinner = withSpinner(CollectionOverview);
-const CollectionPageWithSpinner = withSpinner(CollectionPage)
+import CollectionOverviewContainer from '../components/CollectionOverviewContainer';
+import CollectionPageContainer from '../components/CollectionPageContainer';
 
 class ShopPage extends React.Component {
 	componentDidMount() {
@@ -22,26 +16,17 @@ class ShopPage extends React.Component {
 	}
 
 	render() {
-		const { match, isLoading } = this.props;
-		console.log(isLoading);
+		const { match } = this.props;
 		return (
 			<div className="shop-page">
 				<Route
 					exact
 					path={`${match.path}`}
-					render={(props) => 
-						<CollectionOverviewWithSpinner 
-							isLoading={isLoading} 
-							{...props} 
-						/>}
+					component={CollectionOverviewContainer}
 				/>
 				<Route
 					path={`${match.path}/:collectionId`}
-					render={(props) => 
-						<CollectionPageWithSpinner 
-							isLoading={isLoading} 
-							{...props} 
-						/>}
+					component={CollectionPageContainer}
 				/>
 			</div>
 		);
@@ -53,8 +38,4 @@ const mapDispatchToProps = dispatch => ({
 	fetchCollectionsAsync: () => dispatch(fetchCollectionsAsync())
 })
 
-const mapStateToProps = state => ({
-	isLoading: selectIsLoading(state)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
+export default connect(null, mapDispatchToProps)(ShopPage);

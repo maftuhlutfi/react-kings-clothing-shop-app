@@ -3,7 +3,7 @@ import sections from './sectionsData';
 const INITIAL_STATE = {
 	sections,
 	collections: null,
-	isLoading: true,
+	isLoading: false,
 	errorMessage: ''
 }
 
