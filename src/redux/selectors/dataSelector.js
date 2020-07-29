@@ -24,3 +24,13 @@ export const selectCollection = memoize((collectionId) =>
 		(collections) => collections ? collections[collectionId] : null
   )
 );
+
+export const selectIsLoading = createSelector(
+	[selectData],
+	data => data.isLoading
+)
+
+export const selectIsCollectionsLoaded = createSelector(
+	[selectDataCollections],
+	collections => !!!collections
+)
