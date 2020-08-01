@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import {persistStore} from 'redux-persist';
-import { fetchCollectionsStart } from '../sagas/shopSagas';
+import allSagas from '../sagas';
 
 import allReducers from '../reducers';
 
@@ -14,6 +14,6 @@ export const store = createStore(allReducers, composeWithDevTools(
 	applyMiddleware(...middleware)
 ));
 
-sagaMiddleware.run(fetchCollectionsStart);
+sagaMiddleware.run(allSagas);
 
 export const persistor = persistStore(store);
