@@ -4,10 +4,9 @@ import './Login.scss';
 import TextField from '../components/TextField';
 import CustomButton from '../components/CustomButton';
 import GoogleButton from '../components/GoogleButton';
-import { auth, signInWithGoogle } from '../firebase/firebase.utils';
 
 import { connect } from 'react-redux';
-import { googleSignInStart } from '../redux/actions/userActions';
+import { googleSignInStart, emailSignInStart } from '../redux/actions/userActions';
 
 class Login extends React.Component {
 	constructor() {
@@ -31,18 +30,14 @@ class Login extends React.Component {
 		e.preventDefault();
 
 		const { email, password } = this.state;
+		const { emailSignInStart } = this.props;
 
 		if (email === '' || password === '') {
 			this.setState({ error: 'Please enter email or password' });
 			return;
 		}
 
-		try {
-			await auth.signInWithEmailAndPassword(email, password);
-			this.setState({ password: '', email: '' });
-		} catch (err) {
-			this.setState({error: 'Wrong email or password.'})
-		}	
+		emailSignInStart(email, password);
 	}
 
 	render() {
@@ -81,7 +76,8 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-	googleSignInStart: () => dispatch(googleSignInStart())
+	googleSignInStart: () => dispatch(googleSignInStart()),
+	emailSignInStart: (email, password) => dispatch(emailSignInStart({email, password}))
 })
 
 export default connect(null, mapDispatchToProps)(Login);
