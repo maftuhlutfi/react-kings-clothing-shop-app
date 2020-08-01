@@ -1,5 +1,3 @@
-import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
-
 export const setCurrentUser = user => ({
 	type: 'SET_CURRENT_USER',
 	payload: user
@@ -42,7 +40,7 @@ export const fetchCollectionsFailure = errorMessage => ({
 	payload: errorMessage
 })
 
-export const fetchCollectionsAsync = () => {
+/*export const fetchCollectionsAsync = () => {
 	return dispatch => {
 		const collectionsRef = firestore.collection('collections');
 		dispatch(fetchCollectionsStart());
@@ -54,4 +52,4 @@ export const fetchCollectionsAsync = () => {
 			})
 			.catch(err => dispatch(fetchCollectionsFailure(err.message)))
 	}
-}
+}*/
