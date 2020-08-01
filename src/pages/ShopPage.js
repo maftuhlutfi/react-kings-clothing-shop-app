@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import './ShopPage.scss';
 
 import { connect } from 'react-redux';
-import { fetchCollectionsStart } from '../redux/actions';
+import { fetchCollectionsStart } from '../redux/actions/dataActions';
 
 import CollectionOverviewContainer from '../components/CollectionOverviewContainer';
 import CollectionPageContainer from '../components/CollectionPageContainer';

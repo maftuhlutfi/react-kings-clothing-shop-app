@@ -1,6 +1,6 @@
 import {takeEvery, call, put} from 'redux-saga/effects';
 
-import { fetchCollectionsSuccess, fetchCollectionsFailure } from '../actions';
+import { fetchCollectionsSuccess, fetchCollectionsFailure } from '../actions/dataActions';
 
 import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 

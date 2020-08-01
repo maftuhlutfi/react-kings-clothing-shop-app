@@ -3,7 +3,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import CustomButton from './CustomButton';
 
 import {connect} from 'react-redux';
-import { clearAllItem } from '../redux/actions';
+import { clearAllItem } from '../redux/actions/cartActions';
 
 function StripeButton({ price, clearAllItem }) {
 	const priceCents = price * 100;

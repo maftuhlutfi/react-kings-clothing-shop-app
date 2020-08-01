@@ -10,7 +10,7 @@ import Register from './pages/Register';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/actions';
+import { setCurrentUser } from './redux/actions/userActions';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/selectors/userSelector';
 
