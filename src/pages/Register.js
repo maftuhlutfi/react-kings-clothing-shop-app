@@ -3,7 +3,9 @@ import './Register.scss';
 import { Link } from 'react-router-dom';
 import TextField from '../components/TextField';
 import CustomButton from '../components/CustomButton';
-import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
+
+import {connect} from 'react-redux';
+import { signUpStart } from '../redux/actions/userActions';
 
 class Register extends React.Component {
 	constructor() {
@@ -25,10 +27,11 @@ class Register extends React.Component {
 		this.setState({ [name]: value });
 	}
 
-	handleClick = async e => {
+	handleClick = e => {
 		e.preventDefault();
 
 		const { displayName, email, password, confirmPassword } = this.state;
+		const { signUpStart } = this.props;
 
 		if (displayName === '' || email ==='' || password === '') {
 			this.setState({ error: 'Please fill the form.' });
@@ -40,23 +43,7 @@ class Register extends React.Component {
 			return;
 		}
 
-		try {
-			const { user } = await auth.createUserWithEmailAndPassword(
-				email,
-				password
-			);
-			await createUserProfileDocument(user, { displayName });
-
-
-			this.setState({
-				displayName: '',
-				password: '',
-				email: '',
-				confirmPassword: ''
-			});
-		} catch (err) {
-			console.log(err);
-		}
+		signUpStart({ email, password, displayName });
 	}
 
 	render() {
@@ -107,4 +94,8 @@ class Register extends React.Component {
 	}
 }
 
-export default Register;
+const mapDispatchToProps = dispatch => ({
+	signUpStart: userData => dispatch(signUpStart(userData))
+})
+
+export default connect(null, mapDispatchToProps)(Register);
