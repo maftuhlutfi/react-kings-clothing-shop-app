@@ -20,3 +20,16 @@ export const signInFailure = errorMessage => ({
 export const checkUserSession = () => ({
 	type: 'CHECK_USER_SESSION'
 })
+
+export const signOutStart = () => ({
+	type: 'SIGN_OUT_START'
+})
+
+export const signOutSuccess = user => ({
+	type: 'SIGN_OUT_SUCCESS'
+})
+
+export const signOutFailure = errorMessage => ({
+	type: 'SIGN_OUT_FAILURE',
+	payload: errorMessage
+})

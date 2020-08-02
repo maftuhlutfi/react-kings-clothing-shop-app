@@ -9,7 +9,9 @@ import {
 
 import {
 	signInSuccess,
-	signInFailure
+	signInFailure,
+	signOutSuccess,
+	signOutFailure
 } from '../actions/userActions';
 
 function* getSnapshotFromUserAuth(user) {
@@ -49,6 +51,15 @@ export function* isUserLoggedIn() {
 	}
 }
 
+export function* signOut() {
+	try {
+		yield auth.signOut();
+		yield put(signOutSuccess());
+	} catch(err) {
+		yield put(signOutFailure(err.message))
+	}
+}
+
 export function* onGoogleSignInStart() {
 	yield takeLatest('GOOGLE_SIGN_IN_START', signInWithGoogle)
 }
@@ -61,10 +72,15 @@ export function* onCheckUserSession() {
 	yield takeLatest('CHECK_USER_SESSION', isUserLoggedIn)
 }
 
+export function* onSignOutStart() {
+	yield takeLatest('SIGN_OUT_START', signOut)
+}
+
 export function* userSagas() {
 	yield all([
 		call(onGoogleSignInStart),
 		call(onEmailSignInStart),
-		call(onCheckUserSession)
+		call(onCheckUserSession),
+		call(onSignOutStart)
 	])
 }
