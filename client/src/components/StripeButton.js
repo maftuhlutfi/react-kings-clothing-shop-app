@@ -1,6 +1,7 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import CustomButton from './CustomButton';
+import axios from 'axios';
 
 import {connect} from 'react-redux';
 import { clearAllItem } from '../redux/actions/cartActions';
@@ -10,8 +11,22 @@ function StripeButton({ price, clearAllItem }) {
 	const publishableKey = 'pk_test_51H8ey9KjiuF6v9nM8TJsu2VKZAHTOui6vpmdLLzLLPnWFj3T4d1Rtkn2c4U2F6XT9QLaVbo12pDI8aUiOmUAYCz000e9zI6eGq'
 
 	const onToken = token => {
-		console.log(token);
-		clearAllItem();
+		axios({
+			url: 'http://localhost:4000/payment',
+			method: 'post',
+			data: {
+				amount: priceCents,
+				token
+			}
+		})
+			.then(response => {
+				alert('Payment successfully.');
+				clearAllItem();
+			})
+			.catch(error => {
+				alert('There was an issue with the payment.');
+				console.log(error);
+			})
 	}
 
 	return (

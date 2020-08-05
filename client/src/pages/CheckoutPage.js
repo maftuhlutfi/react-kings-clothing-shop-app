@@ -36,12 +36,18 @@ function CheckoutPage({cartItems, totalPrice}) {
 				cartItems.map(cartItem => <CheckoutItem key={cartItem.id} cartItem={cartItem} />) :
 				<p>No items to checkout.</p>
 			}
-
-			<div className='total'>
-				{totalPrice ? <span>Total price: ${totalPrice}</span> : ''}
+			<div className='total-price'>
+				{cartItems.length ? <span>Total price: ${totalPrice}</span> : ''}
 			</div>
 
 			{cartItems.length ? <StripeButton price={totalPrice} /> : ''}
+			
+			{cartItems.length ? 
+				<span className='payment-guide'>
+					Please use this Credit Card<br/>
+					No. 4242 4242 4242 4242 - Exp. Future Date - CVV. 123
+				</span> : ''
+			}
 		</div>
 	);
 }
