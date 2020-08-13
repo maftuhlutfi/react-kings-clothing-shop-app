@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Header from './components/Header';
 import Spinner from './components/Spinner';
+import ErrorBoundary from './components/ErrorBoundary';
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -26,25 +27,27 @@ const App = ({ checkUserSession, currentUser }) => {
     <div className='App'>
       <Header />
       <Switch>
-        <Suspense fallback={<Spinner />}>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
-          <Route
-            exact
-            path='/checkout'
-            render={() => currentUser ? <CheckoutPage /> : <Login />}
-          />
-          <Route
-            exact
-            path='/login'
-            render={() => currentUser ? (<Redirect to='/' />) : <Login />}
-          />
-          <Route
-            exact
-            path='/register'
-            render={() => currentUser ? (<Redirect to='/' />) : <Register />}
-          />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner />}>
+            <Route exact path='/' component={HomePage} />
+            <Route path='/shop' component={ShopPage} />
+            <Route
+              exact
+              path='/checkout'
+              render={() => currentUser ? <CheckoutPage /> : <Login />}
+            />
+            <Route
+              exact
+              path='/login'
+              render={() => currentUser ? (<Redirect to='/' />) : <Login />}
+            />
+            <Route
+              exact
+              path='/register'
+              render={() => currentUser ? (<Redirect to='/' />) : <Register />}
+            />
+          </Suspense>
+        </ErrorBoundary>
       </Switch>
     </div>
   );
