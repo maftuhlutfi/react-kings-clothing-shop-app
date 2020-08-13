@@ -73,5 +73,19 @@
         margin-bottom: 10px;
       }
     }
+
+    .custom-button {
+      position: absolute;
+      width: 80%;
+      padding: 0;
+      top: 65%;
+      opacity: .8;
+      height: 50px;
+      display: none;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 }
