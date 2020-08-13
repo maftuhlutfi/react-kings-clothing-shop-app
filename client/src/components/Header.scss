@@ -44,3 +44,41 @@ a {
   text-decoration: none;
   color: white;
 }
+
+@media only screen and (max-width: 768px) {
+  .header {
+
+    .right-side {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      
+      .options {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+
+        .option {
+          margin: 10px;
+          cursor: pointer;
+        }
+
+        .login {
+          background-color: white;
+          color: black;
+          padding: 10px 15px;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    .logo-container {
+      height: 100%;
+      width: 45px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
