@@ -41,6 +41,20 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 	return userRef;
 }
 
+export const getUserCartRef = async userId => {
+	const cartsRef = firestore.collection('carts').where('userId', '==', userId);
+	const snapShot = await cartsRef.get();
+
+	if (snapShot.empty) {
+		const cartDocRef = firestore.collection('carts').doc();
+		await cartDocRef.set({ userId, cartItems: [] });
+		return cartDocRef;
+	} else {
+		console.log(snapShot);
+		return snapShot.docs[0].ref;
+	}
+}
+
 export const addCollectionsAndDocuments = async (CollectionKey, objectsToAdd) => {
 	const collectionRef = firestore.collection(CollectionKey);
 
